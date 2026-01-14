@@ -3,7 +3,12 @@ type Answers{
     answerOne:String
     answerTwo:String
     answerThree:String
-    answerId:ID
+}
+
+input AnswersInput{
+    answerOne:String
+    answerTwo:String
+    answerThree:String
 }
 
 type Question {
@@ -16,7 +21,12 @@ type Quiz {
     question: String
     answers: [Answers]
 }
+input questionInput {
+    question: String
+    }
 `;
 export const quizQueryTypeDefs = `
   quiz(_id: ID): Quiz
 `;
+export const quizMutationTypeDefs = `
+addQuestion(input:questionInput):Question`;

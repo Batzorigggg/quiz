@@ -1,25 +1,23 @@
 import { Schema, model } from "mongoose";
-import {
-  IQuestionDocument,
-  type IAnswersDocument,
-  type IQuizDocument,
-} from "./types.ts";
+import { type IQuizDocument, type IQuestion, type IAnswers } from "./types.ts";
 
-const AnswersSchema: Schema<IAnswersDocument> = new Schema({
+const AnswersSchema: Schema<IAnswers> = new Schema({
+  answerId: { type: String, required: true },
   answerTwo: { type: String, required: true },
   answerThree: { type: String, required: true },
   answerOne: { type: String, required: true },
 });
 
-const QuestionSchema: Schema<IQuestionDocument> = new Schema({
+const QuestionSchema: Schema<IQuestion> = new Schema({
   questionId: { type: String, required: true },
   question: { type: String, required: true },
 });
 
 const QuizSchema: Schema<IQuizDocument> = new Schema({
-  answerId: { type: String, required: true },
-  question: { QuestionSchema },
-  answers: { AnswersSchema },
+  questionId: { QuestionSchema },
+  answersId: { AnswersSchema },
 });
 
 export const Quiz = model<IQuizDocument>("quiz", QuizSchema);
+export const Answers = model<IAnswers>("answers", AnswersSchema);
+export const Question = model<IQuestion>("questions", QuestionSchema);
