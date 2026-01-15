@@ -1,11 +1,14 @@
 export const quizTypeDefs = `
 type Answers{
+questionId: String
+    answerId:ID
     answerOne:String
     answerTwo:String
     answerThree:String
 }
 
-input AnswersInput{
+input answersInput{
+questionId:String
     answerOne:String
     answerTwo:String
     answerThree:String
@@ -26,7 +29,8 @@ input questionInput {
     }
 `;
 export const quizQueryTypeDefs = `
-  quiz(_id: ID): Quiz
+  quizDetail(_id: ID): Quiz
 `;
 export const quizMutationTypeDefs = `
-addQuestion(input:questionInput):Question`;
+addQuestion(input:questionInput):Question
+addAnswers(input:answersInput):Answers`;

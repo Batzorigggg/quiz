@@ -1,4 +1,3 @@
-import { model } from "mongoose";
 import { Quiz } from "../model.ts";
 
 export const quizQueries = {

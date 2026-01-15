@@ -1,14 +1,13 @@
 import Document from "mongoose";
 
 export interface IAnswers {
-  answerId: string;
+  questionId: string;
   answerOne: string;
   answerTwo: string;
   answerThree: string;
 }
 
 export interface IQuestion {
-  questionId: string;
   question: string;
 }
 

@@ -1,12 +1,29 @@
-import { type IQuestion, type IQuiz } from "../types.ts";
+import { type IAnswers, type IQuestion, type IQuiz } from "../types.ts";
 import { Quiz, Answers, Question } from "../model.ts";
 
-export const quizMutation = {
-  addQuestion: async (_root: undefined, { input }: { input: IQuestion }) => {
+export const questionMutation = {
+  addQuestion: async (_root: any, { input }: { input: IQuestion }) => {
     const { question } = input;
-    const quiz = await Question.insertOne({
-      question: input.question,
+    await Question.insertOne({
+      question,
     });
-    return quiz;
+    return "success";
   },
+};
+
+export const answerMutation = {
+  addAnswers: async (_root: any, { input }: { input: IAnswers }) => {
+    const { answerOne, answerTwo, answerThree, questionId } = input;
+    await Answers.insertOne({
+      questionId,
+      answerOne,
+      answerTwo,
+      answerThree,
+    });
+    return "success";
+  },
+};
+
+export const quizMutation = {
+  addQuiz: async (_root: any, { input }: { input: IQuiz }) => {},
 };
