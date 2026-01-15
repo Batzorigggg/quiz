@@ -15,7 +15,7 @@ mongoose
 
 export interface IContext {
   user: {
-    firstname: string;
+    name: string;
   };
 }
 
@@ -26,7 +26,7 @@ const { url } = await startStandaloneServer(server, {
   context: async ({ req, res }) => {
     return {
       user: {
-        firstname: "bat",
+        name: "bat",
       },
     };
   },

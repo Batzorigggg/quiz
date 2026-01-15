@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Auth Demo</title>
+  </head>
+  <body>
+    <h2>Register</h2>
+    <input id="regName" placeholder="name" /><br /><br />
+    <input id="regEmail" placeholder="email" /><br /><br />
+    <input
+      id="regPassword"
+      type="password"
+      placeholder="password"
+    /><br /><br />
+    <button onclick="register()">Register</button>
+
+    <hr />
+
+    <h2>Login</h2>
+    <input id="loginEmail" placeholder="email" /><br /><br />
+    <input
+      id="loginPassword"
+      type="password"
+      placeholder="password"
+    /><br /><br />
+    <button onclick="login()">Login</button>
+
+    <hr />
+
+    <h2>Protected Action</h2>
+    <button onclick="getProfile()">Get Profile (JWT)</button>
+
+    <p id="message"></p>
+
+    <script>
+      const endpoint = "http://localhost:4000/";
+      const message = document.getElementById("message");
+
+      async function register() {
+        const name = document.getElementById("regName").value;
+        const email = document.getElementById("regEmail").value;
+        const password = document.getElementById("regPassword").value;
+
+        const mutation = `
+        mutation Mutation($input: RegisterInput) {
+    register(input: $input) {
+      id
+      name
+      email
+    }
+  }
+    `;
+
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            query: mutation,
+            variables: { input: { name, email, password } },
+          }),
+        });
+
+        const data = await res.json();
+        console.log(data);
+
+        message.textContent = data.data
+          ? "Registered successfully!"
+          : "Registration failed";
+      }
+
+      async function login() {
+        const email = document.getElementById("loginEmail").value;
+        const password = document.getElementById("loginPassword").value;
+
+        const mutation = `
+        mutation Login($input: LoginInput) {
+        login(input: $input)
+      }
+    `;
+
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            query: mutation,
+            variables: { input: { email, password } },
+          }),
+        });
+
+        const data = await res.json();
+        console.log(data);
+
+        if (data.data && data.data.login.token) {
+          localStorage.setItem("token", data.data.login.token);
+          message.textContent = "Login successful! Token saved.";
+        } else {
+          message.textContent = "Login failed";
+        }
+      }
+
+      async function getProfile() {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          message.textContent = "No token found. Please login.";
+          return;
+        }
+
+        const query = `
+      query {
+        me {
+          name
+          email
+        }
+      }
+    `;
+
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ query }),
+        });
+
+        const data = await res.json();
+        console.log(data);
+
+        if (data.data && data.data.me) {
+          message.textContent =
+            "Welcome " + data.data.me.name + " (" + data.data.me.email + ")";
+        } else {
+          message.textContent = "Invalid or expired token";
+        }
+      }
+    </script>
+  </body>
+</html>
