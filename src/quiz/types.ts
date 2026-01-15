@@ -14,8 +14,7 @@ export interface IQuestion {
 
 export interface IQuiz {
   quizId: string;
-  questionId: IQuestion;
-  answersId: IAnswers;
+  answersId: string;
 }
 
 export interface IQuizDocument extends IQuiz, Document {}
