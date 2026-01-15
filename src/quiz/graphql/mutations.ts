@@ -3,9 +3,10 @@ import { Quiz, Answers, Question } from "../model.ts";
 
 export const questionMutation = {
   addQuestion: async (_root: any, { input }: { input: IQuestion }) => {
-    const { question } = input;
+    const { question, variant } = input;
     await Question.insertOne({
       question,
+      variant,
     });
     return "success";
   },
@@ -22,8 +23,4 @@ export const answerMutation = {
     });
     return "success";
   },
-};
-
-export const quizMutation = {
-  addQuiz: async (_root: any, { input }: { input: IQuiz }) => {},
 };

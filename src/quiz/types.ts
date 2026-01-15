@@ -8,6 +8,7 @@ export interface IAnswers {
 }
 
 export interface IQuestion {
+  variant: string;
   question: string;
 }
 

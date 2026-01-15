@@ -9,6 +9,7 @@ const AnswersSchema: Schema<IAnswers> = new Schema({
 });
 
 const QuestionSchema: Schema<IQuestion> = new Schema({
+  variant: { type: String, required: true },
   question: { type: String, required: true },
 });
 

@@ -1,8 +1,8 @@
-import { Quiz } from "../model.ts";
+import { Question, Quiz } from "../model.ts";
 
 export const quizQueries = {
-  quizDetail: async (_root: undefined, { _id }: { _id: string }) => {
-    const user = await Quiz.findOne({ _id });
+  quizz: async (_root: undefined, { variant }: { variant: string }) => {
+    const user = await Question.find({ variant });
     return user;
   },
 };
