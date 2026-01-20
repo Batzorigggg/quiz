@@ -3,10 +3,10 @@ import { Quiz, Answers, Question } from "../model.ts";
 
 export const questionMutation = {
   addQuestion: async (_root: any, { input }: { input: IQuestion }) => {
-    const { question, variant } = input;
+    const { question, quizId } = input;
     await Question.insertOne({
       question,
-      variant,
+      quizId,
     });
     return "success";
   },

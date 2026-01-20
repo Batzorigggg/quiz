@@ -9,13 +9,12 @@ const AnswersSchema: Schema<IAnswers> = new Schema({
 });
 
 const QuestionSchema: Schema<IQuestion> = new Schema({
-  variant: { type: String, required: true },
+  quizId: { type: String, required: true },
   question: { type: String, required: true },
 });
 
 const QuizSchema: Schema<IQuizDocument> = new Schema({
-  questionId: { QuestionSchema },
-  answersId: { AnswersSchema },
+  variant: { type: String, required: true },
 });
 
 export const Quiz = model<IQuizDocument>("quiz", QuizSchema);

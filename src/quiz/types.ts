@@ -8,13 +8,12 @@ export interface IAnswers {
 }
 
 export interface IQuestion {
-  variant: string;
+  quizId: string;
   question: string;
 }
 
 export interface IQuiz {
-  quizId: string;
-  answersId: string;
+  variant: string;
 }
 
 export interface IQuizDocument extends IQuiz, Document {}
