@@ -16,22 +16,20 @@ questionId:String
 
 type Question {
     questionId: ID
-    variant: String
     question: String
 }
 
 type Quiz {
     _id: ID
-    question: String
     answers: [Answers]
 }
 input questionInput {
-    variant: String
     question: String
     }
 `;
 export const quizQueryTypeDefs = `
-  quizz(variant: String): [String]
+    quizz()
+  quiz(variant: String): [String]
 `;
 export const quizMutationTypeDefs = `
 addQuestion(input:questionInput):Question
