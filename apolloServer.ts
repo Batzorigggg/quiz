@@ -1,4 +1,4 @@
-import { quizQueries } from "./src/quiz/graphql/queries.ts";
+import { quizChoosingQueries } from "./src/quiz/graphql/queries.ts";
 import {
   quizMutationTypeDefs,
   quizQueryTypeDefs,
@@ -24,6 +24,6 @@ export const typeDefs = `
     ${userMutationTypeDefs}}
 `;
 export const resolvers = {
-  Query: { ...quizQueries },
+  Query: { ...quizChoosingQueries },
   Mutation: { ...questionMutation, ...answerMutation, ...userMutations },
 };

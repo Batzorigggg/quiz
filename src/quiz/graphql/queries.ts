@@ -6,8 +6,9 @@ export const quizChoosingQueries = {
     const a = quizs.length;
     const rand = [];
     for (let i = 0; i < 5; i++) {
-      const b = Math.random() * (a - 0) + 0;
+      const b = Math.floor(Math.random() * a);
       rand.push(quizs[b]);
+      console.log(rand);
     }
     return rand;
   },
