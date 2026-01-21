@@ -31,7 +31,7 @@ input questionInput {
     }
 `;
 export const quizQueryTypeDefs = `
-  quizz(variant: String): [String]
+  quizz(variant: String): Question
 `;
 export const quizMutationTypeDefs = `
 addQuestion(input:questionInput):Question

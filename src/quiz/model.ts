@@ -14,7 +14,7 @@ const QuestionSchema: Schema<IQuestion> = new Schema({
 });
 
 const QuizSchema: Schema<IQuizDocument> = new Schema({
-  questionId: { QuestionSchema },
+  quizId: { QuestionSchema },
   answersId: { AnswersSchema },
 });
 
