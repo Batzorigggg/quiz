@@ -3,18 +3,18 @@ import { type IQuizDocument, type IQuestion, type IAnswers } from "./types.ts";
 
 const AnswersSchema: Schema<IAnswers> = new Schema({
   questionId: { type: String, required: true },
-  answerTwo: { type: String, required: true },
-  answerThree: { type: String, required: true },
+  answerTwo: { type: String },
+  answerThree: { type: String },
   answerOne: { type: String, required: true },
 });
 
 const QuestionSchema: Schema<IQuestion> = new Schema({
-  quizId: { type: String, required: true },
   question: { type: String, required: true },
+  quizId: { type: String, required: true },
 });
 
 const QuizSchema: Schema<IQuizDocument> = new Schema({
-  variant: { type: String, required: true },
+  name: { type: String, required: true },
 });
 
 export const Quiz = model<IQuizDocument>("quiz", QuizSchema);

@@ -8,12 +8,14 @@ export interface IAnswers {
 }
 
 export interface IQuestion {
-  quizId: string;
   question: string;
+  quizId: string;
 }
 
 export interface IQuiz {
-  variant: string;
+  name: string;
 }
 
-export interface IQuizDocument extends IQuiz, Document {}
+export interface IQuizDocument extends IQuiz, Document {
+  answerId: string;
+}
